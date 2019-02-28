@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PlayBackInfoViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +123,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\fast-forward.png" />
+    <Resource Include="Resources\from.png" />
+    <Resource Include="Resources\next.png" />
+    <Resource Include="Resources\playstop.png" />
+    <Resource Include="Resources\prev.png" />
+    <Resource Include="Resources\rewind.png" />
+    <Resource Include="Resources\to.png" />
     <Content Include="share\ffmpeg\avcodec-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

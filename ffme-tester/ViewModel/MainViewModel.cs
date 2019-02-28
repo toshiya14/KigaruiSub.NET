@@ -16,11 +16,14 @@ namespace ffme_tester.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        public PlayBackInfo MainVideoInfo { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
+            MainVideoInfo = new PlayBackInfo();
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

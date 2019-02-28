@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:ffme_tester"
         xmlns:ffme="clr-namespace:Unosquare.FFME;assembly=ffme.win"
         mc:Ignorable="d"
-        Title="MainWindow" Height="420" Width="640">
+        Title="MainWindow" Height="500" Width="780" DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+    <Window.Resources>
+        <Image x:Key="PlayPauseIcon" Source="./Resources/playstop.png"/>
+        <Image x:Key="FastForwardIcon" Source="./Resources/fast-forward.png" />
+        <Image x:Key="RewindIcon" Source="./Resources/rewind.png" />
+        <Image x:Key="NextFrameIcon" Source="./Resources/next.png" />
+        <Image x:Key="PrevFrameIcon" Source="./Resources/prev.png" />
+        <Image x:Key="SetStartIcon" Source="./Resources/from.png" />
+        <Image x:Key="SetEndIcon" Source="./Resources/to.png" />
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top" FontSize="12">
             <MenuItem Header="文件(_F)" Padding="6,3">
@@ -28,7 +37,7 @@
             </MenuItem>
 
             <MenuItem Header="视频(_V)" Padding="6,3">
-                <MenuItem Header="打开视频" Click="MenuOpenVideo_Click"></MenuItem>
+                <MenuItem Header="打开视频" Command="{Binding MainVideoInfo.LoadVideoCommand}" CommandParameter="{Binding ElementName=Player}"></MenuItem>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1">
@@ -38,34 +47,52 @@
             </Grid.ColumnDefinitions>
             <GridSplitter Width="3" Margin="-1.5"></GridSplitter>
             <!-- LEFT GRID -->
-                <Grid Margin="0,0,0,3">
+            <Grid Margin="0,0,0,3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*" MinHeight="240"/>
                     <RowDefinition Height="4*"/>
                 </Grid.RowDefinitions>
                 <GridSplitter Height="3" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="-1.5"></GridSplitter>
-                <Grid MinHeight="150" SizeChanged="PlayerWrapGrid_SizeChanged">
-                    <ffme:MediaElement Background="#FF171717" x:Name="Player" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3"></ffme:MediaElement>
+                <Grid SizeChanged="PlayerWrapGrid_SizeChanged" Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="24" />
+                    </Grid.RowDefinitions>
+                    <ffme:MediaElement Background="#FF171717" x:Name="Player" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3"
+                                       Source="{Binding MainVideoInfo.VideoSource}" Position="{Binding MainVideoInfo.CurrentTime}"></ffme:MediaElement>
+                    <Slider Grid.Row="1" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Center" Minimum="0" Maximum="{Binding MainVideoInfo.TotalSteps}" Value="{Binding MainVideoInfo.CurrentStep, Mode=TwoWay}"></Slider>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                        <StackPanel.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="Height" Value="24"/>
+                                <Setter Property="Width" Value="24"/>
+                                <Setter Property="Background" Value="{x:Null}"/>
+                                <Setter Property="Margin" Value="3,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button Content="{StaticResource PlayPauseIcon}" Command="{Binding MainVideoInfo.PauseOrPlayCommand}" CommandParameter="{Binding ElementName=Player}"></Button>
+                        <Button Content="{StaticResource RewindIcon}" Command="{Binding MainVideoInfo.RewindCommand}" CommandParameter="{Binding ElementName=Player}"></Button>
+                        <Button Content="{StaticResource FastForwardIcon}" Command="{Binding MainVideoInfo.FastForwardCommand}" CommandParameter="{Binding ElementName=Player}"></Button>
+                        <Grid Width="1" Background="#FFBBBBBB" Margin="1"></Grid>
+                        <Button Content="{StaticResource NextFrameIcon}"></Button>
+                        <Button Content="{StaticResource PrevFrameIcon}"></Button>
+                        <Grid Width="1" Background="#FFBBBBBB" Margin="1"></Grid>
+                        <Button Content="{StaticResource SetStartIcon}"></Button>
+                        <Button Content="{StaticResource SetEndIcon}"></Button>
+                        <Grid Width="1" Background="#FFBBBBBB" Margin="1"></Grid>
+                        <Grid Width="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" HorizontalAlignment="Right" FontFamily="consolas" FontSize="9" Text="{Binding MainVideoInfo.TotalSteps}" />
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Right" FontFamily="consolas" FontSize="9" Text="{Binding MainVideoInfo.CurrentStep}" />
+                        </Grid>
+                    </StackPanel>
                 </Grid>
-                <StackPanel Orientation="Vertical" Grid.Row="1">
-                    <Slider></Slider>
-                    <Grid Height="40">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Content="播放/暂停" Click="CtrlBtnPlay_Click"></Button>
-                    </Grid>
-                </StackPanel>
             </Grid>
-
         </Grid>
     </DockPanel>
 </Window>

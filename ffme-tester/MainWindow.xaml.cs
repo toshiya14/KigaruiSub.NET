@@ -43,7 +43,7 @@ namespace ffme_tester
         {
             var grid = sender as Grid;
             var width = grid.ActualWidth;
-            var height = grid.ActualHeight;
+            var height = grid.ActualHeight - 46;
             if(width / 16 > height / 9)
             {
                 var towidth = height / 9 * 16;
