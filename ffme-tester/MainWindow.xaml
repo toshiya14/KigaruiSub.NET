@@ -1,0 +1,71 @@
+<Window x:Class="ffme_tester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ffme_tester"
+        xmlns:ffme="clr-namespace:Unosquare.FFME;assembly=ffme.win"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="420" Width="640">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" FontSize="12">
+            <MenuItem Header="文件(_F)" Padding="6,3">
+                <MenuItem Header="新建空白字幕项目"/>
+                <MenuItem Header="打开字幕项目"/>
+                <MenuItem Header="保存项目"/>
+                <MenuItem Header="项目另存为"/>
+                <Separator />
+                <MenuItem Header="自动保存" IsCheckable="True" IsChecked="True"/>
+                <MenuItem Header="自动保存的项目">
+                    <MenuItem Header="(空)" IsEnabled="False" />
+                </MenuItem>
+                <MenuItem Header="近期项目">
+                    <MenuItem Header="(空)" IsEnabled="False" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="编辑器选项"/>
+                <MenuItem Header="结束请挂机"/>
+            </MenuItem>
+
+            <MenuItem Header="视频(_V)" Padding="6,3">
+                <MenuItem Header="打开视频" Click="MenuOpenVideo_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <GridSplitter Width="3" Margin="-1.5"></GridSplitter>
+            <!-- LEFT GRID -->
+                <Grid Margin="0,0,0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <GridSplitter Height="3" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="-1.5"></GridSplitter>
+                <Grid MinHeight="150" SizeChanged="PlayerWrapGrid_SizeChanged">
+                    <ffme:MediaElement Background="#FF171717" x:Name="Player" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3"></ffme:MediaElement>
+                </Grid>
+                <StackPanel Orientation="Vertical" Grid.Row="1">
+                    <Slider></Slider>
+                    <Grid Height="40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Content="播放/暂停" Click="CtrlBtnPlay_Click"></Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+    </DockPanel>
+</Window>
