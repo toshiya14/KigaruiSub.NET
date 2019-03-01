@@ -22,6 +22,7 @@ namespace ffme_tester
     public partial class MainWindow : Window
     {
         private static readonly string AppPath = AppDomain.CurrentDomain.BaseDirectory;
+
         public MainWindow()
         {
             // Initialize FFME
@@ -39,6 +40,11 @@ namespace ffme_tester
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the SizeChanged event of the PlayerWrapGrid.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SizeChangedEventArgs"/> instance containing the event data.</param>
         private void PlayerWrapGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             var grid = sender as Grid;
@@ -55,34 +61,6 @@ namespace ffme_tester
                 var toheight = width / 16 * 9;
                 Player.Height = toheight;
                 Player.Width = width;
-            }
-        }
-
-        private void MenuOpenVideo_Click(object sender, RoutedEventArgs e)
-        {
-            var openfile = new OpenFileDialog()
-            {
-                Title = "打开视频",
-                Filter = "常用视频文件(*.mp4,*.mkv,*.264,*.webm,*.flv,*.vob,*.avi,*.mpg,*.ts,*.m2ts,*.mov,*.wmv,*.rm,*.rmvb,*.m4v,*.mpeg,*.3gp,*.f4v)|*.mp4;*.mkv;*.264;*.webm;*.flv;*.vob;*.avi;*.mpg;*.ts;*.m2ts;*.mov;*.wmv;*.rm;*.rmvb;*.m4v;*.mpeg;*.3gp;*.f4v;*.MP4;*.MKV;*.264;*.WEBM;*.FLV;*.VOB;*.AVI;*.MPG;*.TS;*.M2TS;*.MOV;*.WMV;*.RM;*.RMVB;*.M4V;*.MPEG;*.3GP;*.F4V|常用音频格式(*.aac,*.ape,*.flac,*.m4a,*.mp3,*.ogg,*.wav,*.wma)|*.AAC;*.APE;*.FLAC;*.M4A;*.MP3;*.OGG;*.WAV;*.WMA;*.aac;*.ape;*.flac;*.m4a;*.mp3;*.ogg;*.wav;*.wma|其他格式(*.*)|*.*",
-                RestoreDirectory = true,
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
-            };
-            if(openfile.ShowDialog() == true)
-            {
-                var file = openfile.FileName;
-                Player.Source = new Uri(file);
-            }
-        }
-
-        private void CtrlBtnPlay_Click(object sender, RoutedEventArgs e)
-        {
-            if (Player.IsPaused)
-            {
-                Player.Play();
-            }
-            else
-            {
-                Player.Pause();
             }
         }
     }

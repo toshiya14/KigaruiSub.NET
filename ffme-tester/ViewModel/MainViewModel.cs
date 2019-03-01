@@ -18,12 +18,16 @@ namespace ffme_tester.ViewModel
     {
         public PlayBackInfo MainVideoInfo { get; set; }
 
+        public Config CurrentConfig { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
             MainVideoInfo = new PlayBackInfo();
+            CurrentConfig = new Config();
+            CurrentConfig.DumpConfig();
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

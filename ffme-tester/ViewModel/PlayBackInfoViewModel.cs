@@ -45,18 +45,31 @@ namespace ffme_tester.ViewModel
             get { return timesCalculated; }
             set { Set(ref timesCalculated, value); }
         }
-        
+
         public long TotalSteps
         {
-            get { return (long)(totalTimes.TotalSeconds * FrameRate); }
+            get { return (long)(totalTimes.TotalSeconds * FrameRate) + 1; }
         }
-        
+
         public long CurrentStep
         {
             get { return (long)(currentTime.TotalSeconds * FrameRate); }
             set {
+                if(value == TotalSteps)
+                {
+                    CurrentTime = TotalTimes;
+                    return;
+                }
                 var seconds = value / FrameRate;
-                CurrentTime = TimeSpan.FromSeconds(seconds);
+                var gotoPos = TimeSpan.FromSeconds(seconds);
+                if(gotoPos >= TotalTimes)
+                {
+                    CurrentTime = TotalTimes;
+                }
+                else
+                {
+                    CurrentTime = gotoPos;
+                }
             }
         }
 
@@ -65,6 +78,30 @@ namespace ffme_tester.ViewModel
         {
             get { return frameRate; }
             set { Set(ref frameRate, value); }
+        }
+
+        private int videoHeight;
+        public int VideoHeight {
+            get { return videoHeight; }
+            set { Set(ref videoHeight, value); }
+        }
+
+        private int videoWidth;
+        public int VideoWidth {
+            get { return videoWidth; }
+            set { Set(ref videoWidth, value); }
+        }
+
+        private int playerHeight;
+        public int PlayerHeight {
+            get { return playerHeight; }
+            set { Set(ref playerHeight, value); }
+        }
+
+        private int playerWidth;
+        public int PlayerWidth {
+            get { return playerWidth; }
+            set { Set(ref playerWidth, value); }
         }
 
         #endregion
@@ -93,13 +130,13 @@ namespace ffme_tester.ViewModel
             // Calculate Time after open
             RoutedEventHandler action = null;
             action = (sender, args) => {
-                CalculateTime(Player);
+                MeasureVideo(Player);
                 Player.MediaReady -= action;
             };
             Player.MediaReady += action;
         }
 
-        private void CalculateTime(MediaElement Player)
+        private void MeasureVideo(MediaElement Player)
         {
             // Pause if the video is playing.
             if (Player.IsPlaying) {
@@ -110,6 +147,8 @@ namespace ffme_tester.ViewModel
             if (Player.NaturalDuration.HasTimeSpan)
             {
                 FrameRate = Player.VideoFrameRate;
+                VideoHeight = Player.NaturalVideoHeight;
+                VideoWidth = Player.NaturalVideoWidth;
                 TotalTimes = Player.NaturalDuration.TimeSpan;
                 timesCalculated = true;
             }
@@ -143,7 +182,7 @@ namespace ffme_tester.ViewModel
                 }
             }
         }
-        
+
         private bool PlayerIsOpen(MediaElement Player)
         {
             if (Player != null)
