@@ -18,7 +18,9 @@ namespace ffme_tester.ViewModel
     {
         public PlayBackInfo MainVideoInfo { get; set; }
 
-        public Config CurrentConfig { get; set; }
+        public Config CurrentConfig { get { return Config.Current; } }
+
+        public TaskList CurrentTaskList { get { return TaskList.Current; } }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -26,12 +28,19 @@ namespace ffme_tester.ViewModel
         public MainViewModel()
         {
             MainVideoInfo = new PlayBackInfo();
-            CurrentConfig = new Config();
-            CurrentConfig.DumpConfig();
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
+            if (IsInDesignMode)
+            {
+                // code runs in blend --> create design time data.
+                CurrentTaskList.Header = "测试标题";
+                CurrentTaskList.ShowList = true;
+                CurrentTaskList.ShowProgress = true;
+                CurrentTaskList.TaskItems = new System.Collections.Generic.List<TaskListItem> {
+                    new TaskListItem{ Description="第一个任务", State= TaskListItemState.Waiting},
+                    new TaskListItem{ Description="第二个任务", State= TaskListItemState.Waiting},
+                    new TaskListItem{ Description="第三个任务", State= TaskListItemState.Waiting},
+                    new TaskListItem{ Description="第四个任务", State= TaskListItemState.Waiting}
+                };
+            }
             ////else
             ////{
             ////    // Code runs "for real"

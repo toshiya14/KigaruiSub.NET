@@ -11,6 +11,29 @@ namespace ffme_tester.ViewModel
 {
     public class Config : ViewModelBase
     {
+        #region Single Instance
+        private static Config _instance;
+        private static object SILock = new object();
+        public static Config Current
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (SILock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new Config();
+                        }
+                    }
+                }
+                return _instance;
+            }
+        }
+
+        #endregion
+
         #region Const Values
         private readonly string[] ExportProps = {
             "Common_VideoContainerHeight",
@@ -35,6 +58,14 @@ namespace ffme_tester.ViewModel
             set { Set(ref common_videoContainerWidth, value); }
         }
 
+        private TimeSpan popup_animationTime = new TimeSpan(0,0,0,0,500);
+        [Description("弹出窗口的弹出以及收起动画时间，单位ms")]
+        public TimeSpan Popup_AnimationTime
+        {
+            get { return popup_animationTime; }
+            set { Set(ref popup_animationTime, value); }
+        }
+
         private bool video_useFrameUnit;
         public bool Video_UseFrameUnit {
             get { return video_useFrameUnit; }
@@ -52,6 +83,15 @@ namespace ffme_tester.ViewModel
                 RaisePropertyChanged("Video_UseFrameUnit");
                 RaisePropertyChanged("Video_FrameVisibility");
                 RaisePropertyChanged("Video_TimeVisibility");
+            }
+        }
+        private int video_playerStep;
+        public int Video_PlayerStep
+        {
+            get { return video_playerStep; }
+            set
+            {
+                Set(ref video_playerStep, value);
             }
         }
         public Visibility Video_FrameVisibility {
