@@ -73,7 +73,6 @@ namespace ffme_tester
             await Task.Delay(1000);
             await TaskList.Current.Initialize();
             TaskList.Current.Header = "测试标题";
-            TaskList.Current.ShowList = true;
             TaskList.Current.ShowProgress = true;
             TaskList.Current.TaskItems = new System.Collections.Generic.List<TaskListItem> {
                     new TaskListItem{ Description="执行预定义脚本", State= TaskListItemState.Waiting},
@@ -84,25 +83,36 @@ namespace ffme_tester
             TaskList.Current.Active();
             await Task.Delay(2000);
             TaskList.Current.Next("生成每一行的结果(0/10)");
+            TaskList.Current.SetProgress(0, 10);
             TaskList.Current.Update("生成每一行的结果(1/10)");
+            TaskList.Current.SetProgress(1);
             await Task.Delay(1000);
             TaskList.Current.Update("生成每一行的结果(2/10)");
+            TaskList.Current.SetProgress(2);
             await Task.Delay(1000);
             TaskList.Current.Update("生成每一行的结果(3/10)");
+            TaskList.Current.SetProgress(3);
             await Task.Delay(100);
             TaskList.Current.Update("生成每一行的结果(4/10)");
+            TaskList.Current.SetProgress(4);
             await Task.Delay(100);
             TaskList.Current.Update("生成每一行的结果(5/10)");
+            TaskList.Current.SetProgress(5);
             await Task.Delay(100);
             TaskList.Current.Update("生成每一行的结果(6/10)");
+            TaskList.Current.SetProgress(6);
             await Task.Delay(100);
             TaskList.Current.Update("生成每一行的结果(7/10)");
+            TaskList.Current.SetProgress(7);
             await Task.Delay(2000);
             TaskList.Current.Update("生成每一行的结果(8/10)");
+            TaskList.Current.SetProgress(8);
             await Task.Delay(100);
             TaskList.Current.Update("生成每一行的结果(9/10)");
+            TaskList.Current.SetProgress(9);
             await Task.Delay(100);
             TaskList.Current.Update("生成每一行的结果(10/10)");
+            TaskList.Current.SetProgress(10);
             TaskList.Current.Next();
             TaskList.Current.Next();
             await TaskList.Current.Initialize();

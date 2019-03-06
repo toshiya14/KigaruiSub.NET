@@ -48,6 +48,7 @@ namespace ffme_tester.ViewModel
                 Set(ref taskitems, value);
                 RaisePropertyChanged("ProgressMaximum");
                 RaisePropertyChanged("ProgressValue");
+                RaisePropertyChanged("CurrentRunningTask");
             }
         }
 
@@ -55,7 +56,23 @@ namespace ffme_tester.ViewModel
         public int CursorIndex
         {
             get { return cursorIndex; }
-            set { Set(ref cursorIndex, value); }
+            set {
+                Set(ref cursorIndex, value);
+                RaisePropertyChanged("CurrentRunningTask");
+            }
+        }
+
+        private TaskListItem CurrentRunningTask {
+            get {
+                try
+                {
+                    return TaskItems[CursorIndex];
+                }
+                catch
+                {
+                    return null;
+                }
+            }
         }
 
         private bool showProgress = true;
@@ -78,18 +95,8 @@ namespace ffme_tester.ViewModel
         {
             get { return showList ? Visibility.Visible : Visibility.Collapsed; }
         }
-
-        public int ProgressMaximum
-        {
-            get { return taskitems.Where(x => x.State != TaskListItemState.NotAvailable).Count(); }
-        }
-
-        public int ProgressValue
-        {
-            get { return taskitems.Where(x => x.State == TaskListItemState.Finished).Count(); }
-        }
         #endregion
-      
+
         #region Public Functions
         public async Task Initialize() {
             ShowList = false;
@@ -186,6 +193,14 @@ namespace ffme_tester.ViewModel
             RaisePropertyChanged("ProgressMaximum");
             Next();
         }
+        public void SetProgress(int val, int max = 0)
+        {
+            if (max > 0)
+            {
+                CurrentRunningTask.ProgressMaximum = max;
+            }
+            CurrentRunningTask.ProgressValue = val;
+        }
         #endregion
 
     }
@@ -202,6 +217,18 @@ namespace ffme_tester.ViewModel
         public string Description {
             get { return description; }
             set { Set(ref description, value); }
+        }
+
+        private int progressMaximum;
+        public int ProgressMaximum {
+            get { return progressMaximum; }
+            set { Set(ref progressMaximum, value); }
+        }
+
+        private int progressValue;
+        public int ProgressValue {
+            get { return progressValue; }
+            set { Set(ref progressValue, value); }
         }
     }
 

@@ -106,7 +106,7 @@ namespace ffme_tester.ViewModel
 
         #endregion
 
-        #region Functions
+        #region Command Functions Definations
         private void LoadVideo(MediaElement Player)
         {
             TotalTimes = default(TimeSpan);
@@ -193,7 +193,7 @@ namespace ffme_tester.ViewModel
         }
         #endregion
 
-        #region Command
+        #region Command Props
         public RelayCommand<MediaElement> LoadVideoCommand { get; set; }
         public RelayCommand<MediaElement> FastForwardCommand { get; set; }
         public RelayCommand<MediaElement> RewindCommand { get; set; }
