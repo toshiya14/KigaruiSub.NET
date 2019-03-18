@@ -136,24 +136,6 @@ namespace ffme_tester.ViewModel
             Player.MediaReady += action;
         }
 
-        private void MeasureVideo(MediaElement Player)
-        {
-            // Pause if the video is playing.
-            if (Player.IsPlaying) {
-                Player.Pause();
-            }
-
-            // if player has natural duration timespan, use it as the total time.
-            if (Player.NaturalDuration.HasTimeSpan)
-            {
-                FrameRate = Player.VideoFrameRate;
-                VideoHeight = Player.NaturalVideoHeight;
-                VideoWidth = Player.NaturalVideoWidth;
-                TotalTimes = Player.NaturalDuration.TimeSpan;
-                timesCalculated = true;
-            }
-        }
-
         private void FastForward(MediaElement Player) {
             if (PlayerIsOpen(Player))
             {
@@ -198,6 +180,32 @@ namespace ffme_tester.ViewModel
         public RelayCommand<MediaElement> FastForwardCommand { get; set; }
         public RelayCommand<MediaElement> RewindCommand { get; set; }
         public RelayCommand<MediaElement> PauseOrPlayCommand { get; set; }
+        #endregion
+
+        #region Functions
+        
+        private void MeasureVideo(MediaElement Player)
+        {
+            // Pause if the video is playing.
+            if (Player.IsPlaying)
+            {
+                Player.Pause();
+            }
+
+            // if player has natural duration timespan, use it as the total time.
+            if (Player.NaturalDuration.HasTimeSpan)
+            {
+                FrameRate = Player.VideoFrameRate;
+                VideoHeight = Player.NaturalVideoHeight;
+                VideoWidth = Player.NaturalVideoWidth;
+                TotalTimes = Player.NaturalDuration.TimeSpan;
+                timesCalculated = true;
+            }
+        }
+
+        private void MeasureAudio(MediaElement Player) {
+        }
+
         #endregion
 
         public PlayBackInfo()
