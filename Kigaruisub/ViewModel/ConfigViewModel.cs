@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ffme_tester.ViewModel
+namespace RMEGo.Kigaruisub.ViewModel
 {
     public class Config : ViewModelBase
     {

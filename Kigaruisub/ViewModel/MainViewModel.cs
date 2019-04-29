@@ -1,6 +1,6 @@
 using GalaSoft.MvvmLight;
 
-namespace ffme_tester.ViewModel
+namespace RMEGo.Kigaruisub.ViewModel
 {
     /// <summary>
     /// This class contains properties that the main View can data bind to.

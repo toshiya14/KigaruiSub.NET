@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ffme-tester", "ffme-tester\ffme-tester.csproj", "{0C22E8B4-FCB5-43B7-BDEC-579720B7A56E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kigaruisub", "Kigaruisub\Kigaruisub.csproj", "{0C22E8B4-FCB5-43B7-BDEC-579720B7A56E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioSpectogramTester", "AudioSpectogramTester\AudioSpectogramTester.csproj", "{3082FDE7-3A98-4ACF-AB01-DC6ACED3748C}"
 EndProject

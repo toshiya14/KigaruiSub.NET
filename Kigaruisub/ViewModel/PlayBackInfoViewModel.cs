@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Unosquare.FFME;
 
-namespace ffme_tester.ViewModel
+namespace RMEGo.Kigaruisub.ViewModel
 {
     public class PlayBackInfo : ViewModelBase
     {

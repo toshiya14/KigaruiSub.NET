@@ -16,7 +16,7 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
-namespace ffme_tester.ViewModel
+namespace RMEGo.Kigaruisub.ViewModel
 {
     /// <summary>
     /// This class contains static references to all the view models in the
