@@ -1,7 +1,15 @@
-# KigaruiSub.NET
+# KigaruiSub.NET　説明
 
 ネーム通り気軽くで字幕を作りツールなんです。  
 今は開発中です。
+
+# 特別感謝（順番なし）
+
+- [Github - unosquare/ffmediaelement](https://github.com/unosquare/ffmediaelement)  
+- [Github - naudio/NAudio](https://github.com/naudio/NAudio)
+- [FFMpeg](https://ffmpeg.org/)  
+
+# 開発ノート
 
 ## 基本機能
 
@@ -22,3 +30,8 @@
 - [ ] txt
 
 ### UX関連
+
+- [ ] 2倍速（或いは他のスビート）で再生  
+- [ ] キー押すだけでタイミング編集
+- [ ] カラオケ編集  
+- [ ] カラオケ編集 - キー押すで`\k`タイミング編集
