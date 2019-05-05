@@ -5,8 +5,9 @@
 
 # 特別感謝（順番なし）
 
-- [Github - unosquare/ffmediaelement](https://github.com/unosquare/ffmediaelement)  
-- [Github - naudio/NAudio](https://github.com/naudio/NAudio)
+- [Github | unosquare/ffmediaelement](https://github.com/unosquare/ffmediaelement)  
+- [Github | naudio/NAudio](https://github.com/naudio/NAudio)  
+- [CodeProject | NRTFTree - A class library for RTF processing in C#](https://www.codeproject.com/Articles/11306/NRTFTree-A-class-library-for-RTF-processing-in-C)  
 - [FFMpeg](https://ffmpeg.org/)  
 
 # 開発ノート

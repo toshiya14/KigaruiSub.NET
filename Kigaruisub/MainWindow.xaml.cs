@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RMEGo.Kigaruisub.Helpers;
+using System.Diagnostics;
 
 namespace RMEGo.Kigaruisub
 {
@@ -36,7 +38,7 @@ namespace RMEGo.Kigaruisub
                 MessageBox.Show("缺少ffmpeg相关的可执行文件，请重新解压/安装本程序。\n遇到无法继续的错误，程序将会退出。", "初始化失败", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
             }
-            Unosquare.FFME.MediaElement.FFmpegDirectory = ffmpegPath;
+            Unosquare.FFME.Library.FFmpegDirectory = ffmpegPath;
 
             // Warm up
 
@@ -71,7 +73,14 @@ namespace RMEGo.Kigaruisub
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-        
+            var converter = new AssToRTF();
+            var text = @"{\fn微軟雅黑}{\t(\r(36,74),10)}{\fs24\b1}内容";
+            var result = converter.Divide(@"{\fn微軟雅黑}{\t(\r(36,74),10)}{\fs24\b1}内容");
+            var linqresult = from u in result where u[0] == AssToRTF.SECTION_CMD select u;
+            for(var i = 0;i < linqresult.Count(); i++)
+            {
+                
+            }
         }
     }
 }

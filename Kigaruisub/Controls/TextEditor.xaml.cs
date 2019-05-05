@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RMEGo.Kigaruisub.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,10 +26,41 @@ namespace RMEGo.Kigaruisub.Controls
         {
             InitializeComponent();
 
-            var input = @"{\rtf1\ansi\deff0\fs24\b Bold \b0\iItalic\i0\ul UnderLine \ulnone\strike StrikeLine \strike0\fs36 BigFont \fs24}";
-            var ms = new MemoryStream(Encoding.UTF8.GetBytes(input));
-            text.SelectAll();
-            text.Selection.Load(ms, DataFormats.Rtf);
+            var converter = new AssToRTF();
+            var intext = @"{\fn微軟雅黑}{\t(\r(36,74),10)}{\fs24\b1}内容";
+            var textRange = new TextRange(text.Document.ContentStart, text.Document.ContentEnd);
+            var endPoint = text.Document.ContentEnd;
+            var result = converter.Divide(intext);
+            foreach(var section in result)
+            {
+                switch (section[0])
+                {
+                    case AssToRTF.SECTION_CMD:
+                        var lastLetter = section[1] + 1;
+                        for(var i = section[1] + 1; i <= section[2]; i++)
+                        {
+                            var @char = intext[i];
+                            if ((@char>='a' && @char<='z') || (@char >= 'A' && @char <= 'Z'))
+                            {
+                                lastLetter = i;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        var start = textRange.Start.GetPositionAtOffset(section[1], LogicalDirection.Forward);
+                        var end = start.GetPositionAtOffset(1, LogicalDirection.Forward);
+                        text.Selection.Select(start, end);
+                        text.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(Color.FromRgb(0xEF, 0x34, 0x56)));
+                        break;
+                }
+            }
+
+            //var input = @"{\rtf1\ansi\ansicpg950\deff0\fs24\b \'b7\'73\'b2\'d3\'a9\'fa\'c5\'e9 \b0\iItalic\i0\ul UnderLine \ulnone\strike StrikeLine \strike0\fs36 BigFont \fs24}";
+            //var ms = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            //text.SelectAll();
+            //text.Selection.Load(ms, DataFormats.Rtf);
         }
 
         public static string Escape(string s)

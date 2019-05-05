@@ -128,7 +128,7 @@ namespace RMEGo.Kigaruisub.ViewModel
             }
 
             // Calculate Time after open
-            RoutedEventHandler action = null;
+            EventHandler action = null;
             action = (sender, args) => {
                 MeasureVideo(Player);
                 Player.MediaReady -= action;
@@ -193,12 +193,12 @@ namespace RMEGo.Kigaruisub.ViewModel
             }
 
             // if player has natural duration timespan, use it as the total time.
-            if (Player.NaturalDuration.HasTimeSpan)
+            if (Player.NaturalDuration.HasValue)
             {
                 FrameRate = Player.VideoFrameRate;
                 VideoHeight = Player.NaturalVideoHeight;
                 VideoWidth = Player.NaturalVideoWidth;
-                TotalTimes = Player.NaturalDuration.TimeSpan;
+                TotalTimes = Player.NaturalDuration.Value;
                 timesCalculated = true;
             }
         }
